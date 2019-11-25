@@ -1,0 +1,39 @@
+Notes taken from https://github.com/Zilliqa/Zilliqa-JavaScript-Library
+Also note: library has been cloned to _zilliqa-resouces library (may not be required on both places).
+
+
+
+*** Installation ***
+It is recommended that developers install the JavaScript client 
+by making use of the umbrella package @zilliqa-js/zilliqa.
+This takes care of bootstrapping the various modules, 
+which are then accessible as members of the Zilliqa class.
+
+
+yarn add @zilliqa-js/zilliqa
+# you may also need to install the tslib package.
+yarn add tslib
+# bn.js should be added with the above package. if it is not, install it manually.
+yarn add bn.js
+
+
+
+*** Introduction ***
+zilliqa-js is structured as a Lerna monorepo.
+Each package roughly corresponds to a discrete ZilliqaModule,
+most of which can be used independently.
+
+The only required package is @zilliqa-js/core,
+which contains the default HTTPProvider, 
+and other core abstractions that are necessary for other modules to function.
+
+The following table provides a description of each module and what you may want to use it for.
+
+package	description	dependencies
+@zilliqa-js/core	Core abstractions and base classes, such as HTTPProvider and network logic for interfacing with the Zilliqa JSON-RPC.	none
+@zilliqa-js/account	Wallet, Account and Transaction abstractions live in this package.	@zilliqa-js/core, @zilliqa-js/crypto, @zilliqa-js/util, @zilliqa-js/proto
+@zilliqa-js/blockchain	Main interface to the Zilliqa JSON-RPC.	none
+@zilliqa-js/contract	Exposes a Contracts module that takes care of smart contract deployment and interaction.	@zilliqa-js/account, @zilliqa-js/blockchain, @zilliqa-js/core, @zilliqa-js/util
+@zilliqa-js/crypto	Exposes several loosely-coupled cryptographic convenience functions for working with the Zilliqa blockchain and its cryptographic primitives, such as Schnorr signatures.	@zilliqa-js/util
+@zilliqa-js/proto	Protobuf source files and corresponding generated JS modules.	none
+@zilliqa-js/util	Miscellaneous functions that take care of serialisation/deserialisation and validation.	none
